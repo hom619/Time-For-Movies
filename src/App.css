@@ -1,0 +1,56 @@
+.wrapper {
+  background-color: rgb(5, 122, 169);
+  min-height: 100vh;
+}
+nav {
+  background: rgba(5, 75, 103, 0.507);
+}
+.hero {
+  position: relative;
+  min-height: 80vh;
+}
+.pagination-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-top: 20px;
+}
+.pagination {
+  display: flex;
+  align-content: center;
+  font-family: sans-serif;
+  font-weight: 300;
+  line-height: 1em;
+}
+.page-link {
+  color: black;
+  text-decoration: none;
+}
+.searchButton {
+  height: 39px;
+  padding: 10px 25px;
+  border: 0;
+  background: linear-gradient(rgb(99, 228, 157), rgb(45, 171, 180));
+  position: absolute;
+  top: -1px;
+  right: -15px;
+  z-index: 5;
+  color: white;
+}
+/* card display for search page */
+.movie-card-display {
+  background: rgba(255, 255, 255, 0.313);
+  backdrop-filter: blur(3px);
+  width: 1000px;
+}
+.movie-card-display img {
+  width: 40%;
+  height: auto;
+}
+@media (max-width: 768px) {
+  .movie-card-item img {
+    max-height: 220px;
+    object-fit: cover;
+  }
+}
