@@ -11,3 +11,22 @@ export const fetchMovieFromApi = async (str) => {
     console.log(error);
   }
 };
+export const fetchMovieDetailsFromApi = async (id) => {
+  try {
+    const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`;
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const fetchMovieVideos = async (id) => {
+  try {
+    const url = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${apiKey}`;
+
+    const response = await axios.get(url);
+    return response.data.results;
+  } catch (error) {
+    console.log(error);
+  }
+};

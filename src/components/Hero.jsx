@@ -5,7 +5,7 @@ import { fetchMovieFromApi } from "../Utils/axios";
 import { Link } from "react-router-dom";
 import { SearchPage } from "./SearchPage";
 import { Pagination } from "./Pagination";
-export const Hero = (addMoviesList) => {
+export const Hero = () => {
   const [moviesList, setMoviesList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [moviesPerPage, setMoviesPerPage] = useState(5);
@@ -22,7 +22,6 @@ export const Hero = (addMoviesList) => {
   const handleOnButtonSearch = () => {
     fetchMovie(searchRef.current.value);
     searchRef.current.value = "";
-    addMoviesList(moviesList);
   };
   const fetchMovie = async (str) => {
     const movie = await fetchMovieFromApi(str);
@@ -51,9 +50,6 @@ export const Hero = (addMoviesList) => {
   };
   return (
     <div>
-      <nav className="py-3 text-light fixed-top">
-        <h2 className="container">Time for Movies</h2>
-      </nav>
       <div
         className="hero d-flex justify-content-center align-items-center text-light"
         style={movieStyle}
