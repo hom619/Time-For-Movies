@@ -31,46 +31,91 @@ export const MovieCard = () => {
     setReleaseYear(convertedYear);
     // console.log(movie[0].poster_path);
   };
+  const movieStyle = {
+    backgroundImage: `url(
+        https://image.tmdb.org/t/p/w500${movieDetails?.poster_path}
+      )`,
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+    height: "60vh",
+  };
+  const timeConvert = (time) => {
+    const hours = time / 60;
+    const rhours = Math.floor(hours);
+    const minutes = (hours - rhours) * 60;
+    const rminutes = Math.round(minutes);
+    return rhours > 0 ? rhours + "h" + " " + rminutes + "m" : rminutes + "m";
+  };
   return (
-    <div className="single_column">
-      <section className="images">
-        <div className="poster_wrapper">
-          <div className="poster">
-            <div className="image_content">
-              <img
-                className="poster"
-                src={`https://image.tmdb.org/t/p/w500${movieDetails?.poster_path}`}
-                alt=""
-              />
+    <div className="movie-wrapper">
+      <div className="wrapper-container" style={movieStyle}>
+        <div className="movie-poster">
+          <img
+            className="poster"
+            src={`https://image.tmdb.org/t/p/w500${movieDetails?.poster_path}`}
+            alt=""
+          />
+        </div>
+        <div className="movie-info">
+          <div className="movie-info-header">
+            <div className="movie-title text-white">
+              <h2 className="movie-name">
+                {movieDetails?.original_title} <span>({releaseYear})</span>
+              </h2>
+              <div className="movie-facts d-flex gap-2">
+                <span className="certification">M</span>
+                <span className="release">
+                  <i className="bi bi-dot"></i>
+                  {movieDetails?.release_date}({movieDetails?.origin_country})
+                </span>
+                <span className="genres">
+                  <i className="bi bi-dot"></i>
+                  {movieDetails?.genres?.map((genre) => {
+                    <div key={genre.id}>{genre.name},</div>;
+                  })}
+                </span>
+
+                <span className="runtime">
+                  <i className="bi bi-dot"></i>
+                  {timeConvert(movieDetails?.runtime)}
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="">
+            <ul className="movie-actions">
+              <li className="favourites">
+                <i
+                  className="bi bi-bookmark-fill"
+                  style={{ color: "white" }}
+                ></i>
+              </li>
+              <li className="watchList">
+                <i className="bi bi-heart-fill" style={{ color: "white" }}></i>
+              </li>
+              <li className="playVideo" style={{ all: "revert" }}>
+                <button onClick={() => setButtonPopup(true)}>
+                  <i
+                    className="bi bi-play-circle-fill"
+                    style={{ marginRight: "8px" }}
+                  ></i>
+                  <span>Play Trailer</span>
+                </button>
+                <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
+                  <YouTube videoId={videos[0]?.key} />
+                </Popup>
+              </li>
+            </ul>
+          </div>
+          <div className="movie-overview text-white">
+            <h3>Overview</h3>
+            <div className="overview">
+              <p>{movieDetails?.overview}</p>
             </div>
           </div>
         </div>
-        <div className="header_wrapper">
-          <section className="header">
-            <div className="title">
-              <h2 className="movie_title">
-                {movieDetails?.title}{" "}
-                <span>
-                  {"("}
-                  {releaseYear}
-                  {")"}
-                </span>
-              </h2>
-              <div className="facts d-flex">
-                <span className="release"> {movieDetails?.release_date}</span>
-                <span className="runtime">{movieDetails?.runtime}</span>
-              </div>
-            </div>
-            <div>
-              <button onClick={() => setButtonPopup(true)}>Play Trailer</button>
-              <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
-                <YouTube videoId={videos[0]?.key} />
-              </Popup>
-            </div>
-            <div className="header_info"></div>
-          </section>
-        </div>
-      </section>
+      </div>
     </div>
   );
 };
