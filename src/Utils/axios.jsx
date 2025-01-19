@@ -20,6 +20,15 @@ export const fetchMovieDetailsFromApi = async (id) => {
     console.log(error);
   }
 };
+export const fetchTrendingMovieFromApi = async () => {
+  try {
+    const url = `https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}`;
+    const response = await axios.get(url);
+    return response.data.results;
+  } catch (error) {
+    console.log(error);
+  }
+};
 export const fetchMovieVideos = async (id) => {
   try {
     const url = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${apiKey}`;

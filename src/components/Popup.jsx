@@ -8,10 +8,11 @@ export const Popup = (props) => {
       <div className="popup-inner">
         <button
           type="button"
-          className="btn-close btn-close-white"
-          aria-label="Close"
+          className="btn-close"
           onClick={() => props.setTrigger(false)}
-        ></button>
+        >
+          <i className="bi bi-x"></i>
+        </button>
         {props.children}
       </div>
     </div>

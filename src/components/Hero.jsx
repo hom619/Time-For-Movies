@@ -1,47 +1,40 @@
 /* eslint-disable no-unused-vars */
 import { React, useEffect, useRef, useState } from "react";
 import { randomChar } from "../Utils/random";
-import { fetchMovieFromApi } from "../Utils/axios";
-import { Link } from "react-router-dom";
+import { fetchMovieFromApi, fetchTrendingMovieFromApi } from "../Utils/axios";
+import { Link, useNavigate } from "react-router-dom";
 import { SearchPage } from "./SearchPage";
-import { Pagination } from "./Pagination";
+import { Trending } from "./Trending";
+import Carousel from "react-multi-carousel";
+import { responsive } from "../Utils/carouselData";
 export const Hero = () => {
-  const [moviesList, setMoviesList] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [moviesPerPage, setMoviesPerPage] = useState(5);
+  const [trendingMoviesList, setTrendingMoviesList] = useState([]);
+
   //   const [bgImage, setbgImage] = useState("");
   const loadingState = useRef(true);
   const searchRef = useRef("");
   const [searchState, setSearchState] = useState(true);
+  const navigate = useNavigate();
   useEffect(() => {
     if (loadingState.current) {
-      fetchMovie(randomChar());
+      // fetchMovie(randomChar());
+      fetchTrendingMovie();
       loadingState.current = false;
     }
   }, []);
   const handleOnButtonSearch = () => {
-    fetchMovie(searchRef.current.value);
+    navigate(`/search/${searchRef.current.value}`);
     searchRef.current.value = "";
   };
-  const fetchMovie = async (str) => {
-    const movie = await fetchMovieFromApi(str);
-    setMoviesList(movie);
-    console.log(movie);
+  const fetchTrendingMovie = async () => {
+    const movie = await fetchTrendingMovieFromApi();
+    setTrendingMoviesList(movie);
     setSearchState(false);
-    // console.log(movie[0].poster_path);
   };
-  // Get current Movies
-  const indexOfLastMovie = currentPage * moviesPerPage;
-  const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
-  const currentMovies = moviesList.slice(indexOfFirstMovie, indexOfLastMovie);
 
-  //Change pages
-  const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
   const movieStyle = {
     backgroundImage: `url(
-        https://image.tmdb.org/t/p/w500${moviesList[0]?.poster_path}
+        https://image.tmdb.org/t/p/w500${trendingMoviesList[0]?.poster_path}
       )`,
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
@@ -68,28 +61,34 @@ export const Hero = () => {
               className="form-control"
               placeholder="Search for a movie"
             />
-            {/* <Link to={"/searchPage"}></Link> */}
             <button
               className="searchButton rounded-pill"
-              onClick={handleOnButtonSearch}
               type="button"
               id="button-search"
+              onClick={handleOnButtonSearch}
             >
               Search
             </button>
           </div>
         </div>
       </div>
-      {!searchState && (
-        <div className="movie-card-display mt-5">
-          <SearchPage moviesList={currentMovies} />
-          <Pagination
-            moviesPerPage={moviesPerPage}
-            totalMovies={moviesList.length}
-            paginate={paginate}
-          />
-        </div>
-      )}
+      <div className="trending">
+        <h2>Trending</h2>
+        <Carousel
+          customTransition="all .5"
+          transitionDuration={1000}
+          infinite={true}
+          autoPlay={false}
+          autoPlaySpeed={1000}
+          keyBoardControl={true}
+          responsive={responsive}
+        >
+          {trendingMoviesList.length > 0 &&
+            trendingMoviesList.map((item, i) => (
+              <Trending key={i} trendingMovie={item} />
+            ))}
+        </Carousel>
+      </div>
     </div>
   );
 };

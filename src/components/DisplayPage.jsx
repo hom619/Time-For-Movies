@@ -5,7 +5,7 @@ import { fetchMovieDetailsFromApi, fetchMovieVideos } from "../Utils/axios";
 import { React, useEffect, useRef, useState } from "react";
 import YouTube from "react-youtube";
 
-export const MovieCard = () => {
+export const DisplayPage = () => {
   const loadingState = useRef(true);
   const [movieDetails, setMovieDetails] = useState({});
   const { id } = useParams();
