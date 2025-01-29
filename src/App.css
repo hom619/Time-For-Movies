@@ -10,6 +10,13 @@ nav {
   position: relative;
   min-height: 80vh;
 }
+.container {
+  background: linear-gradient(#c6ddef, #95c5ee);
+  background-clip: text;
+  color: transparent;
+  font-family: monospace;
+  cursor: pointer;
+}
 .searchButton {
   height: 39px;
   padding: 10px 25px;
@@ -20,6 +27,9 @@ nav {
   right: -15px;
   z-index: 5;
   color: white;
+}
+.watchList {
+  cursor: pointer;
 }
 /* pagination for search page */
 .pagination-wrapper {
@@ -402,4 +412,67 @@ html {
   height: calc(150px * 1.5);
   background: #dbdbdb;
   overflow: hidden;
+}
+/* Movie Types */
+.column_header {
+  padding-left: 40px;
+  padding-right: 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+}
+.selector {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid rgba(33, 37, 41, 0.2);
+  border-radius: 30px;
+  justify-content: flex-start;
+  align-content: center;
+}
+.selector_anchor {
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.selector_anchor h3 {
+  font-size: 1em;
+  padding: 4px 20px;
+  margin-bottom: 0;
+  white-space: nowrap;
+}
+.selector_anchor h3 a {
+  transition: -webkit-text-fill-color 0.5s;
+  color: rgb(0, 0, 46);
+  font-weight: 600;
+  text-decoration: none;
+}
+.selector {
+  margin-left: 30px;
+}
+.selector .background {
+  z-index: -1;
+  background: rgb(0, 0, 53);
+  border-radius: 30px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transition: left 0.25s;
+}
+.selected h3 a {
+  background: linear-gradient(to right, #69f3fd 0, #0882ed 100%);
+  background-clip: text;
+  color: transparent;
+}
+
+.selection {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1rem;
+  text-align: center;
+  background: white;
 }

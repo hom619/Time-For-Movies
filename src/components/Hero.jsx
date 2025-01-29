@@ -2,19 +2,23 @@
 import { React, useEffect, useRef, useState } from "react";
 import { randomChar } from "../Utils/random";
 import { fetchMovieFromApi, fetchTrendingMovieFromApi } from "../Utils/axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { SearchPage } from "./SearchPage";
-import { Trending } from "./Trending";
 import Carousel from "react-multi-carousel";
 import { responsive } from "../Utils/carouselData";
+import { MovieTypes } from "./MovieTypes";
+import { MovieCarousel } from "./MovieCarousel";
 export const Hero = () => {
   const [trendingMoviesList, setTrendingMoviesList] = useState([]);
 
   //   const [bgImage, setbgImage] = useState("");
+  // const { state } = useLocation();
+  // const { id } = state;
   const loadingState = useRef(true);
   const searchRef = useRef("");
   const [searchState, setSearchState] = useState(true);
   const navigate = useNavigate();
+  const [favouritesList, setFavouritesList] = useState([]);
   useEffect(() => {
     if (loadingState.current) {
       // fetchMovie(randomChar());
@@ -85,9 +89,12 @@ export const Hero = () => {
         >
           {trendingMoviesList.length > 0 &&
             trendingMoviesList.map((item, i) => (
-              <Trending key={i} trendingMovie={item} />
+              <MovieCarousel key={i} movieList={item} />
             ))}
         </Carousel>
+      </div>
+      <div className="selection">
+        <MovieTypes></MovieTypes>
       </div>
     </div>
   );

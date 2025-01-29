@@ -4,6 +4,8 @@ import { Popup } from "./Popup";
 import { fetchMovieDetailsFromApi, fetchMovieVideos } from "../Utils/axios";
 import { React, useEffect, useRef, useState } from "react";
 import YouTube from "react-youtube";
+import { useNavigate } from "react-router-dom";
+import { storeInLocalStorage, accessFromLocalStorage } from "../Utils/localdb";
 
 export const DisplayPage = () => {
   const loadingState = useRef(true);
@@ -12,16 +14,30 @@ export const DisplayPage = () => {
   const [videos, setVideos] = useState([]);
   const [buttonPopup, setButtonPopup] = useState(false);
   const [releaseYear, setReleaseYear] = useState("");
+  const [movieDetailsList, setMovieDetailsList] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     if (loadingState.current) {
       fetchMovieDetails(id);
       getVideos(id);
+      const movieListFromLocalDb = accessFromLocalStorage();
+      movieListFromLocalDb?.length && setMovieDetailsList(movieListFromLocalDb);
       loadingState.current = false;
     }
   }, []);
   const getVideos = async (movieId) => {
     const movieVideos = await fetchMovieVideos(movieId);
     setVideos(movieVideos);
+  };
+  const handleOnFavouriteList = () => {
+    // navigate("/", { state: { movieDetails: movieDetails } });
+    const filteredMovieList = movieDetailsList.filter(
+      (item) => item.id !== movieDetails.id
+    );
+    setMovieDetailsList(...filteredMovieList, movieDetails);
+    storeInLocalStorage([...filteredMovieList, movieDetails]);
+    alert("Movie has been added to favourites");
+    console.log(movieDetailsList);
   };
   const fetchMovieDetails = async (movieId) => {
     const movieInfo = await fetchMovieDetailsFromApi(movieId);
@@ -69,12 +85,15 @@ export const DisplayPage = () => {
                   <i className="bi bi-dot"></i>
                   {movieDetails?.release_date}({movieDetails?.origin_country})
                 </span>
-                <span className="genres">
-                  <i className="bi bi-dot"></i>
-                  {movieDetails?.genres?.map((genre) => {
-                    <div key={genre.id}>{genre.name},</div>;
-                  })}
-                </span>
+
+                {movieDetails?.genres?.map((genre) => {
+                  return (
+                    <span className="genres" key={genre.id}>
+                      <i className="bi bi-dot"></i>
+                      {genre.name}
+                    </span>
+                  );
+                })}
 
                 <span className="runtime">
                   <i className="bi bi-dot"></i>
@@ -92,7 +111,11 @@ export const DisplayPage = () => {
                 ></i>
               </li>
               <li className="watchList">
-                <i className="bi bi-heart-fill" style={{ color: "white" }}></i>
+                <i
+                  onClick={handleOnFavouriteList}
+                  className="bi bi-heart-fill"
+                  style={{ color: "white" }}
+                ></i>
               </li>
               <li className="playVideo" style={{ all: "revert" }}>
                 <button onClick={() => setButtonPopup(true)}>
