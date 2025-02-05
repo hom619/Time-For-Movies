@@ -18,7 +18,7 @@ export const DisplayPage = () => {
   const [movieDetailsList, setMovieDetailsList] = useState([]);
   const navigate = useNavigate();
   const isMobile = useMediaQuery("(max-width: 550px)");
-  const isTablet = useMediaQuery("(max-width: 990px)");
+  const [showLabel, setShowLabel] = useState(false);
   useEffect(() => {
     if (loadingState.current) {
       fetchMovieDetails(id);
@@ -76,6 +76,13 @@ export const DisplayPage = () => {
     const rminutes = Math.round(minutes);
     return rhours > 0 ? rhours + "h" + " " + rminutes + "m" : rminutes + "m";
   };
+  const handleOnButtonHover = (e) => {
+    if (e === "over") {
+      setShowLabel(true);
+    } else {
+      setShowLabel(false);
+    }
+  };
   return (
     <div className="movie-wrapper">
       <div className="wrapper-container" style={movieStyle}>
@@ -123,12 +130,20 @@ export const DisplayPage = () => {
                   style={{ color: "white" }}
                 ></i>
               </li>
+
               <li className="watchList">
                 <i
+                  onMouseOver={() => handleOnButtonHover("over")}
+                  onMouseOut={() => handleOnButtonHover("out")}
                   onClick={handleOnFavouriteList}
                   className="bi bi-heart-fill"
                   style={{ color: "white" }}
                 ></i>
+                {showLabel && (
+                  <label className="text-white" style={{ width: "150px" }}>
+                    Add to Favourites
+                  </label>
+                )}
               </li>
               <li className="playVideo" style={{ all: "revert" }}>
                 <button onClick={() => setButtonPopup(true)}>

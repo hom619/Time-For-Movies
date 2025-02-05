@@ -74,6 +74,9 @@ export const Hero = () => {
               className="form-control"
               placeholder="Search for a movie"
               style={{ boxShadow: "none" }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") handleOnButtonSearch();
+              }}
             />
             <button
               className="searchButton rounded-pill"
@@ -92,7 +95,7 @@ export const Hero = () => {
           customTransition="all .5"
           transitionDuration={1000}
           infinite={true}
-          autoPlay={false}
+          autoPlay={true}
           autoPlaySpeed={1000}
           keyBoardControl={true}
           responsive={responsive}
