@@ -10,7 +10,9 @@ export const NavBar = () => {
         <Link to={"/"} style={{ color: "inherit", textDecoration: "inherit" }}>
           <img src="src\assets\logo.2.png"></img>
         </Link>
-        <h2>Time for Movies</h2>
+        <Link to={"/"} style={{ color: "inherit", textDecoration: "inherit" }}>
+          <h2>Time for Movies</h2>
+        </Link>
       </nav>
     </div>
   );

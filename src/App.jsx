@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import { DisplayPage } from "./components/DisplayPage";
 import { NavBar } from "./components/NavBar";
 import { SearchPage } from "./components/SearchPage";
+import { Footer } from "./components/Footer";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="movies/:id" element={<DisplayPage />} />
         <Route path="search/:query" element={<SearchPage />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
