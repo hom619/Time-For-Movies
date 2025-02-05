@@ -6,10 +6,11 @@ import { Link } from "react-router-dom";
 export const NavBar = () => {
   return (
     <div>
-      <nav className="py-3 text-light fixed-top">
+      <nav className="navBar py-3 text-light fixed-top d-flex">
         <Link to={"/"} style={{ color: "inherit", textDecoration: "inherit" }}>
-          <h2 className="container">Time for Movies</h2>
+          <img src="src\assets\logo.2.png"></img>
         </Link>
+        <h2>Time for Movies</h2>
       </nav>
     </div>
   );

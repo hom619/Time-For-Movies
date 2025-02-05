@@ -1,30 +1,38 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { React, useState, useEffect } from "react";
-import { accessFromLocalStorage } from "../Utils/localdb";
+import { React, useState, useEffect, useRef } from "react";
+import { accessFromLocalStorage, storeInLocalStorage } from "../Utils/localdb";
 import { MovieCarousel } from "./MovieCarousel";
 import Carousel from "react-multi-carousel";
 import { responsive } from "../Utils/carouselData";
 
-export const MovieTypes = () => {
+export const MovieTypes = ({
+  handleOnMoviesDelete,
+  favouritesList,
+  deleteState,
+}) => {
   useEffect(() => {
-    setIsAllSelected(false);
-    const movieListFromLocalDb = accessFromLocalStorage();
-    if (movieListFromLocalDb?.length) {
-      setAllDisplayList(movieListFromLocalDb);
-      setMovieList(movieListFromLocalDb);
-    }
-  }, []);
+    allSelected();
+    setMovieList(favouritesList);
+  }, [favouritesList]);
   const [movieList, setMovieList] = useState([]);
-  const [allDisplayList, setAllDisplayList] = useState([]);
-  const [isAllSelected, setIsAllSelected] = useState(true);
+  const [isAllSelected, setIsAllSelected] = useState(false);
   const [isRomanticSelected, setIsRomanticSelected] = useState(true);
   const [isActionSelected, setIsActionSelected] = useState(true);
   const [isComedySelected, setIsComedySelected] = useState(true);
   const [isHorrorSelected, setIsHorrorSelected] = useState(true);
   const [isDramaSelected, setIsDramaSelected] = useState(true);
+  const allSelected = () => {
+    setIsAllSelected(false);
+    setIsActionSelected(true);
+    setIsRomanticSelected(true);
+    setIsComedySelected(true);
+    setIsDramaSelected(true);
+    setIsHorrorSelected(true);
+  };
   const handleOnFilteredList = (genre) => {
     return setMovieList(
-      allDisplayList.filter(({ genres }) =>
+      favouritesList.filter(({ genres }) =>
         genres.some(({ name }) => name === genre)
       )
     );
@@ -32,21 +40,22 @@ export const MovieTypes = () => {
   const handleOnSelected = (e, genre) => {
     e.preventDefault();
     if (genre == "all") {
-      setIsAllSelected(false);
-      setIsActionSelected(true);
-      setIsRomanticSelected(true);
-      setIsComedySelected(true);
-      return setMovieList(allDisplayList);
+      allSelected();
+      return setMovieList(favouritesList);
     } else if (genre == "Action") {
       setIsActionSelected(false);
       setIsRomanticSelected(true);
       setIsComedySelected(true);
+      setIsDramaSelected(true);
+      setIsHorrorSelected(true);
       setIsAllSelected(true);
       handleOnFilteredList(genre);
     } else if (genre == "Comedy") {
       setIsRomanticSelected(true);
       setIsActionSelected(true);
       setIsAllSelected(true);
+      setIsHorrorSelected(true);
+      setIsDramaSelected(true);
       setIsComedySelected(false);
       handleOnFilteredList(genre);
     } else if (genre == "Romance") {
@@ -54,6 +63,8 @@ export const MovieTypes = () => {
       setIsActionSelected(true);
       setIsAllSelected(true);
       setIsComedySelected(true);
+      setIsHorrorSelected(true);
+      setIsDramaSelected(true);
       handleOnFilteredList(genre);
     } else if (genre == "Drama") {
       setIsRomanticSelected(true);
@@ -76,7 +87,7 @@ export const MovieTypes = () => {
   return (
     <div>
       <div className="column_header mb-2">
-        <h2>Favourites</h2>
+        <h2 className="favourites_header">Favourites</h2>
         <div className="selector_wrap">
           <div className="selector">
             <div
@@ -172,14 +183,19 @@ export const MovieTypes = () => {
         customTransition="all .5"
         transitionDuration={1000}
         infinite={true}
-        autoPlay={false}
+        autoPlay={true}
         autoPlaySpeed={1000}
         keyBoardControl={true}
         responsive={responsive}
       >
-        {movieList.length > 0 &&
-          movieList.map((item, i) => (
-            <MovieCarousel key={i} movieList={item} />
+        {movieList?.length > 0 &&
+          movieList?.map((item, i) => (
+            <MovieCarousel
+              key={i}
+              movieList={item}
+              deleteMovie={handleOnMoviesDelete}
+              deleteState={deleteState}
+            />
           ))}
       </Carousel>
     </div>

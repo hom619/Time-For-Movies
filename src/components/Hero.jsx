@@ -8,42 +8,51 @@ import Carousel from "react-multi-carousel";
 import { responsive } from "../Utils/carouselData";
 import { MovieTypes } from "./MovieTypes";
 import { MovieCarousel } from "./MovieCarousel";
+import { accessFromLocalStorage, storeInLocalStorage } from "../Utils/localdb";
 export const Hero = () => {
   const [trendingMoviesList, setTrendingMoviesList] = useState([]);
-
-  //   const [bgImage, setbgImage] = useState("");
-  // const { state } = useLocation();
-  // const { id } = state;
   const loadingState = useRef(true);
   const searchRef = useRef("");
-  const [searchState, setSearchState] = useState(true);
+  const [favouriteState, setFavouriteState] = useState(true);
   const navigate = useNavigate();
   const [favouritesList, setFavouritesList] = useState([]);
+  const deleteState = useRef(true);
   useEffect(() => {
     if (loadingState.current) {
       // fetchMovie(randomChar());
       fetchTrendingMovie();
+      const movieListFromLocalDb = accessFromLocalStorage();
+      if (movieListFromLocalDb?.length) {
+        setFavouritesList(movieListFromLocalDb);
+      }
       loadingState.current = false;
+      setFavouriteState(false);
     }
   }, []);
+  const handleOnMoviesDelete = (movieId) => {
+    confirm("Are you sure you want to delete the movie?") &&
+      setFavouritesList(favouritesList.filter((movie) => movie.id !== movieId));
+    storeInLocalStorage(favouritesList.filter((movie) => movie.id !== movieId));
+  };
   const handleOnButtonSearch = () => {
-    navigate(`/search/${searchRef.current.value}`);
-    searchRef.current.value = "";
+    if (searchRef.current.value != "") {
+      navigate(`/search/${searchRef.current.value}`);
+      searchRef.current.value = "";
+    } else {
+      alert("Please insert some value to search");
+    }
   };
   const fetchTrendingMovie = async () => {
     const movie = await fetchTrendingMovieFromApi();
     setTrendingMoviesList(movie);
-    setSearchState(false);
   };
 
   const movieStyle = {
     backgroundImage: `url(
         https://image.tmdb.org/t/p/w500${trendingMoviesList[0]?.poster_path}
       )`,
-    backgroundRepeat: "no-repeat",
+    backgroundRepeat: "repeat",
     backgroundPosition: "center",
-    backgroundSize: "cover",
-    height: "60vh",
   };
   return (
     <div>
@@ -64,6 +73,7 @@ export const Hero = () => {
               type="text"
               className="form-control"
               placeholder="Search for a movie"
+              style={{ boxShadow: "none" }}
             />
             <button
               className="searchButton rounded-pill"
@@ -89,13 +99,20 @@ export const Hero = () => {
         >
           {trendingMoviesList.length > 0 &&
             trendingMoviesList.map((item, i) => (
-              <MovieCarousel key={i} movieList={item} />
+              <MovieCarousel key={i} movieList={item} deleteState={false} />
             ))}
         </Carousel>
       </div>
-      <div className="selection">
-        <MovieTypes></MovieTypes>
-      </div>
+      <hr className="border-3"></hr>
+      {!favouriteState && (
+        <div className="selection">
+          <MovieTypes
+            favouritesList={favouritesList}
+            handleOnMoviesDelete={handleOnMoviesDelete}
+            deleteState={true}
+          ></MovieTypes>
+        </div>
+      )}
     </div>
   );
 };

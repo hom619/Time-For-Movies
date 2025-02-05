@@ -163,6 +163,11 @@
     "@babel/helper-string-parser" "^7.25.9"
     "@babel/helper-validator-identifier" "^7.25.9"
 
+"@custom-react-hooks/use-media-query@^1.5.1":
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/@custom-react-hooks/use-media-query/-/use-media-query-1.5.1.tgz#ef92741709fdd40a7392f175a1d07f1f79b3da51"
+  integrity sha512-a9ON4m1XjlWlCSHmtZ4Horau/1DWURbHlk6dq7mNkaOM5vRyxp2EgklWrUqoX2Ywnqnr065YYDgqUUA0VYZDTw==
+
 "@esbuild/aix-ppc64@0.24.0":
   version "0.24.0"
   resolved "https://registry.yarnpkg.com/@esbuild/aix-ppc64/-/aix-ppc64-0.24.0.tgz#b57697945b50e99007b4c2521507dc613d4a648c"

@@ -6,6 +6,7 @@ import { React, useEffect, useRef, useState } from "react";
 import YouTube from "react-youtube";
 import { useNavigate } from "react-router-dom";
 import { storeInLocalStorage, accessFromLocalStorage } from "../Utils/localdb";
+import { useMediaQuery } from "@custom-react-hooks/use-media-query";
 
 export const DisplayPage = () => {
   const loadingState = useRef(true);
@@ -16,6 +17,8 @@ export const DisplayPage = () => {
   const [releaseYear, setReleaseYear] = useState("");
   const [movieDetailsList, setMovieDetailsList] = useState([]);
   const navigate = useNavigate();
+  const isMobile = useMediaQuery("(max-width: 550px)");
+  const isTablet = useMediaQuery("(max-width: 990px)");
   useEffect(() => {
     if (loadingState.current) {
       fetchMovieDetails(id);
@@ -54,8 +57,18 @@ export const DisplayPage = () => {
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
     backgroundSize: "cover",
-    height: "60vh",
   };
+  const mobileScreens = {
+    height: "250", // Adjust as needed
+
+    width: "400",
+  };
+  const largerScreen = {
+    height: "360", // Adjust as needed
+
+    width: "640",
+  };
+
   const timeConvert = (time) => {
     const hours = time / 60;
     const rhours = Math.floor(hours);
@@ -79,7 +92,7 @@ export const DisplayPage = () => {
               <h2 className="movie-name">
                 {movieDetails?.original_title} <span>({releaseYear})</span>
               </h2>
-              <div className="movie-facts d-flex gap-2">
+              <div className="movie-facts">
                 <span className="certification">M</span>
                 <span className="release">
                   <i className="bi bi-dot"></i>
@@ -126,7 +139,10 @@ export const DisplayPage = () => {
                   <span>Play Trailer</span>
                 </button>
                 <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
-                  <YouTube videoId={videos[0]?.key} />
+                  <YouTube
+                    opts={isMobile ? mobileScreens : largerScreen}
+                    videoId={videos[0]?.key}
+                  />
                 </Popup>
               </li>
             </ul>
