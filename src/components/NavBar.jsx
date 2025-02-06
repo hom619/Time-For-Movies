@@ -8,7 +8,7 @@ export const NavBar = () => {
     <div>
       <nav className="navBar py-3 text-light fixed-top d-flex">
         <Link to={"/"} style={{ color: "inherit", textDecoration: "inherit" }}>
-          <img src="src\assets\logo.2.png"></img>
+          <img src="../src/assets/logo.2.png" alt="Movie Time"></img>
         </Link>
         <Link to={"/"} style={{ color: "inherit", textDecoration: "inherit" }}>
           <h2>Time for Movies</h2>
