@@ -223,16 +223,15 @@ span {
 }
 .movie-wrapper {
   position: relative;
-  min-height: 98vh;
+  min-height: 100vh;
   margin-top: 20px;
 }
 .wrapper-container {
   position: relative;
   top: 80px;
-  min-height: 85vh;
+  min-height: 86vh;
   display: flex;
   flex-wrap: nowrap;
-  height: 60vh;
 }
 
 .wrapper-container::after {
@@ -527,15 +526,7 @@ html {
   text-align: center;
   background: white;
 }
-/* @media (max-width: 500px) {
-  .swiper_container {
-    height: 47rem;
-  }
-  .swiper-slide {
-    width: 28rem !important;
-    height: 36rem !important;
-  }
-} */
+
 /* media Queries */
 /* Ipad view */
 @media (width < 992px) {
@@ -581,7 +572,12 @@ html {
     object-fit: cover;
   }
   /* Movie Details Page */
-
+  .movie-wrapper {
+    height: 120vh;
+  }
+  .wrapper-container {
+    height: 106vh;
+  }
   .movie-name {
     width: 70%;
     font-size: 1.7rem;
@@ -594,7 +590,7 @@ html {
     padding: 0px;
   }
   .overview p {
-    width: 60%;
+    width: 90%;
   }
   /* Movie Types (favourites) */
   .column_header {
@@ -622,26 +618,28 @@ html {
     height: 370px;
     left: 10px;
   }
-  .footer {
-    padding: none;
-  }
-  .footer .connect {
-    padding: 0;
-    gap: 10px;
-    display: flex;
-    justify-content: flex-end;
-    flex-grow: 0;
-  }
-  .footer h2 {
-    font-size: 1.5rem;
-    margin: 0 60px;
-  }
+}
+.footer {
+  padding: none;
+  width: 100%;
+  height: auto;
+}
+.footer .connect {
+  padding: 0;
+  gap: 10px;
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 0;
+}
+.footer h2 {
+  font-size: 1.5rem;
+  margin-right: 15%;
 }
 
 /* Mobile view  */
 @media (max-width: 550px) {
   .navBar {
-    max-width: 430px;
+    max-width: 550px;
     display: flex;
   }
   .navBar img {
@@ -678,22 +676,34 @@ html {
   .card-wrapper {
     padding: none;
   }
+  .movie-wrapper {
+    min-height: 155vh;
+  }
+  .movie-info {
+    height: 400px;
+  }
   .wrapper-container {
     display: flex;
     flex-direction: column;
-    height: 90vh;
+    height: 141vh;
   }
   .movie-poster {
-    height: 250px;
+    height: 220px;
+  }
+  .footer {
+    height: auto;
   }
   .movie-poster img {
-    width: 90%;
-    height: 250px;
+    width: 400px;
+    height: 200px;
     object-fit: cover;
-    margin: 10px;
   }
   .overview p {
-    width: 90%;
+    width: 95%;
+  }
+  .movie-info {
+    position: relative;
+    bottom: 40px;
   }
   .popup {
     width: 400px;
