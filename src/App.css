@@ -651,7 +651,8 @@ html {
     left: 10px;
   }
   .navBar h2 {
-    font-size: 2.5rem;
+    font-size: 2rem;
+    margin-top: 10px;
   }
   .movie-card-image {
     width: inherit;
@@ -680,7 +681,7 @@ html {
     min-height: 155vh;
   }
   .movie-info {
-    height: 400px;
+    height: 450px;
   }
   .wrapper-container {
     display: flex;
@@ -688,7 +689,7 @@ html {
     height: 141vh;
   }
   .movie-poster {
-    height: 220px;
+    height: 200px;
   }
   .footer {
     height: auto;
@@ -724,10 +725,9 @@ html {
   .selector_wrap {
     width: 80%;
   }
-  .footer {
-    height: 100px;
-  }
   .footer h2 {
-    font-size: 1.2rem;
+    width: 30%;
+    font-size: 1rem;
+    margin-top: 10px;
   }
 }
