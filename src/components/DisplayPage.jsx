@@ -18,6 +18,7 @@ export const DisplayPage = () => {
   const [movieDetailsList, setMovieDetailsList] = useState([]);
   const navigate = useNavigate();
   const isMobile = useMediaQuery("(max-width: 550px)");
+  const isTablet = useMediaQuery("(max-width: 780px)");
   const [showLabel, setShowLabel] = useState(false);
   useEffect(() => {
     if (loadingState.current) {
@@ -25,7 +26,6 @@ export const DisplayPage = () => {
       getVideos(id);
       const movieListFromLocalDb = accessFromLocalStorage();
       movieListFromLocalDb?.length && setMovieDetailsList(movieListFromLocalDb);
-      loadingState.current = false;
     }
   }, []);
   const getVideos = async (movieId) => {
@@ -165,7 +165,11 @@ export const DisplayPage = () => {
           <div className="movie-overview text-white">
             <h3>Overview</h3>
             <div className="overview">
-              <p>{movieDetails?.overview}</p>
+              <p>
+                {isTablet && movieDetails?.overview?.length > 80
+                  ? movieDetails?.overview?.slice(0, 450) + "..."
+                  : movieDetails?.overview}
+              </p>
             </div>
           </div>
         </div>
