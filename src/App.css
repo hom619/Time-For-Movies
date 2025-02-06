@@ -583,7 +583,7 @@ html {
     font-size: 1.7rem;
   }
   .movie-facts {
-    width: 70%;
+    width: 80%;
     display: inline-block;
   }
   .playVideo button {
@@ -652,7 +652,7 @@ html {
   }
   .navBar h2 {
     font-size: 2rem;
-    margin-top: 10px;
+    margin-top: 15px;
   }
   .movie-card-image {
     width: inherit;
@@ -681,7 +681,7 @@ html {
     min-height: 155vh;
   }
   .movie-info {
-    height: 450px;
+    height: 400px;
   }
   .wrapper-container {
     display: flex;
@@ -695,8 +695,8 @@ html {
     height: auto;
   }
   .movie-poster img {
-    width: 400px;
-    height: 200px;
+    width: 450px;
+    height: 210px;
     object-fit: cover;
   }
   .overview p {
@@ -728,6 +728,6 @@ html {
   .footer h2 {
     width: 30%;
     font-size: 1rem;
-    margin-top: 10px;
+    margin-top: 15px;
   }
 }
