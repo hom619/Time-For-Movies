@@ -641,7 +641,7 @@ html {
 /* Mobile view  */
 @media (max-width: 550px) {
   .navBar {
-    max-width: 550px;
+    max-width: 430px;
     display: flex;
   }
   .navBar img {
@@ -681,27 +681,43 @@ html {
   .wrapper-container {
     display: flex;
     flex-direction: column;
-    height: 150vh;
+    height: 90vh;
   }
   .movie-poster {
     height: 250px;
   }
   .movie-poster img {
-    width: 300px;
+    width: 90%;
     height: 250px;
     object-fit: cover;
     margin: 10px;
   }
   .overview p {
-    width: 70%;
-  }
-  .movie-info {
-    position: relative;
-    bottom: 40px;
+    width: 90%;
   }
   .popup {
     width: 400px;
     height: 200px;
     left: 10px;
+  }
+  .column_header {
+    display: block;
+  }
+  .selector {
+    width: 100%;
+    margin-left: -52px;
+    flex-wrap: wrap;
+  }
+  .column_header h2 {
+    width: 80%;
+  }
+  .selector_wrap {
+    width: 80%;
+  }
+  .footer {
+    height: 100px;
+  }
+  .footer h2 {
+    font-size: 1.2rem;
   }
 }
