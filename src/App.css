@@ -689,13 +689,14 @@ html {
     height: 141vh;
   }
   .movie-poster {
-    height: 200px;
+    flex: none;
+    margin-bottom: 10px;
   }
   .footer {
     height: auto;
   }
   .movie-poster img {
-    width: 400px;
+    width: 380px;
     height: 210px;
     object-fit: cover;
   }
@@ -704,7 +705,6 @@ html {
   }
   .movie-info {
     position: relative;
-    bottom: 40px;
   }
   .popup {
     width: 400px;
