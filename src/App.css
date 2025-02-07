@@ -639,7 +639,7 @@ html {
 /* Mobile view  */
 @media (max-width: 550px) {
   .navBar {
-    max-width: 550px;
+    max-width: 500px;
     display: flex;
   }
   .navBar img {
@@ -651,7 +651,7 @@ html {
     left: 10px;
   }
   .navBar h2 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin-top: 15px;
   }
   .movie-card-image {
@@ -689,13 +689,14 @@ html {
     height: 141vh;
   }
   .movie-poster {
-    height: 200px;
+    flex: none;
+    margin-bottom: 10px;
   }
   .footer {
     height: auto;
   }
   .movie-poster img {
-    width: 450px;
+    width: 380px;
     height: 210px;
     object-fit: cover;
   }
@@ -704,7 +705,6 @@ html {
   }
   .movie-info {
     position: relative;
-    bottom: 40px;
   }
   .popup {
     width: 400px;
@@ -727,7 +727,7 @@ html {
   }
   .footer h2 {
     width: 30%;
-    font-size: 1rem;
+    font-size: 0.9rem;
     margin-top: 15px;
   }
 }
