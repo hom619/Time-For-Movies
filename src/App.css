@@ -639,7 +639,7 @@ html {
 /* Mobile view  */
 @media (max-width: 550px) {
   .navBar {
-    max-width: 550px;
+    max-width: 500px;
     display: flex;
   }
   .navBar img {
@@ -651,7 +651,7 @@ html {
     left: 10px;
   }
   .navBar h2 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin-top: 15px;
   }
   .movie-card-image {
@@ -695,7 +695,7 @@ html {
     height: auto;
   }
   .movie-poster img {
-    width: 450px;
+    width: 400px;
     height: 210px;
     object-fit: cover;
   }
@@ -727,7 +727,7 @@ html {
   }
   .footer h2 {
     width: 30%;
-    font-size: 1rem;
+    font-size: 0.9rem;
     margin-top: 15px;
   }
 }
