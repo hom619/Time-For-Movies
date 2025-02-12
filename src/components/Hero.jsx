@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import { React, useEffect, useRef, useState } from "react";
-import { randomChar } from "../Utils/random";
 import { fetchMovieFromApi, fetchTrendingMovieFromApi } from "../Utils/axios";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { SearchPage } from "./SearchPage";
@@ -19,7 +18,6 @@ export const Hero = () => {
   const deleteState = useRef(true);
   useEffect(() => {
     if (loadingState.current) {
-      // fetchMovie(randomChar());
       fetchTrendingMovie();
       const movieListFromLocalDb = accessFromLocalStorage();
       if (movieListFromLocalDb?.length) {
