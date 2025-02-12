@@ -2,7 +2,7 @@
 
 Welcome to my time-for-movies repository! This project showcases my front end knowledge and comprehensive overview of my work and progress in web development covering most of the features used in front-end development.
 
-![Website Screentshot](../../public/Images/project-cover.png)
+![Website Screentshot](./public/Images/project-cover.png)
 
 ## Table of Contents
 
